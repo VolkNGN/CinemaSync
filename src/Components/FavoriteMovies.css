@@ -1,0 +1,38 @@
+/* src/Components/FavoriteMovies.css */
+.favorite-movies {
+    background-color: black;
+    color: white;
+    min-height: 100vh;
+    padding: 20px;
+    font-family: 'DM Sans', sans-serif;
+  }
+  
+  .title {
+    font-size: 48px;
+    margin-bottom: 20px;
+  }
+  
+  .movies-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+  }
+  
+  .movie-card {
+    flex: 1 0 18%; /* Ajust this to have 5 movies per row */
+    border-radius: 15px;
+    overflow: hidden;
+  }
+  
+  .movie-card img {
+    width: 100%;
+    height: auto;
+    border-radius: 15px;
+  }
+  
+  .error-message {
+    color: red;
+    font-size: 16px;
+    margin-top: 20px;
+  }
+  

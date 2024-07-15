@@ -1,0 +1,22 @@
+/* src/Components/MovieList.css */
+.movie-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    padding: 20px;
+    background-color: black;
+    color: white;
+  }
+  
+  .movie-item {
+    flex: 1 0 18%; /* Adjust this to have 5 movies per row */
+    border-radius: 15px;
+    overflow: hidden;
+  }
+  
+  .movie-item img {
+    width: 100%;
+    height: auto;
+    border-radius: 15px;
+  }
+  
