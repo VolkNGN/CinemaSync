@@ -1,0 +1,59 @@
+/* src/components/Header.css */
+body {
+    margin: 0;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 16px;
+    font-style: normal;
+    background-color: #f0f2f5;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 40px;
+    background-color: #ffffff;
+    border-bottom: 1px solid #e1e1e1;
+}
+
+.header .logo {
+    display: flex;
+    align-items: center;
+}
+
+.header .logo img {
+    height: 40px;
+    margin-right: 10px;
+}
+
+.header nav a {
+    margin: 0 15px;
+    text-decoration: none;
+    color: #333;
+    font-size: 16px;
+}
+
+.header nav a:hover {
+    color: #007BFF;
+}
+
+.header .search {
+    display: flex;
+    align-items: center;
+}
+
+.header .search input {
+    border: none;
+    padding: 5px 10px;
+    border-radius: 20px;
+    background-color: #f1f1f1;
+    outline: none;
+    margin-right: 10px;
+}
+
+.header .profile {
+    width: 40px;
+    height: 40px;
+    background-color: #007BFF;
+    border-radius: 50%;
+}
