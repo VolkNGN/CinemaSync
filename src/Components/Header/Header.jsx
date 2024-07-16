@@ -9,6 +9,7 @@ const Header = () => {
             <div className="logo">
                 <img src={logo} alt="Logo" />
             </div>
+            <p className="moviesync">Moviesync</p>
             <nav>
                 <a href="/home">Accueil</a>
                 <a href="/movies">Mes films</a>
