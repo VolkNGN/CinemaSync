@@ -1,5 +1,6 @@
 // src/App.jsx
-import React, { useState } from 'react';
+import React from 'react';
+import Header from './Components/Header/Header' ;
 import FavoriteMovies from './Components/FavoriteMovies';
 import MovieList from './Components/MovieList';
 import './App.css';
@@ -29,6 +30,7 @@ const App = () => {
 
   return (
     <div className="App">
+      <Header />
       <MovieList addFavoriteMovie={addFavoriteMovie} />
       <FavoriteMovies accountId={accountId} sessionId={sessionId} apiKey={apiKey} />
     </div>
