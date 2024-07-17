@@ -1,49 +1,29 @@
-import React from 'react';
-import { Routes, Route } from 'react-router-dom';
-import Header from './Components/Header/Header';
-import FavoriteMovies from './Components/FavoriteMovies';
-import MovieList from './Components/MovieList';
-import ProfilePage from './Components/profil/ProfilePage';
-import './App.css';
+import React from 'react'; // Importation de React
+import { Routes, Route } from 'react-router-dom'; // Importation des composants de routage
+import Header from './Components/Header/Header'; // Importation du composant Header
+import FavoriteMovies from './Components/FavoriteMovies'; // Importation du composant FavoriteMovies
+import MovieList from './Components/MovieList'; // Importation du composant MovieList
+import ProfilePage from './Components/profil/ProfilePage'; // Importation du composant ProfilePage
+import SuggestionsCarousel from './Components/SuggestionsCarousel/SuggestionsCarousel'; // Importation du composant SuggestionsCarousel
+import './App.css'; // Importation des styles de l'application
 
 const App = () => {
-  const accountId = 'votre_account_id';
-  const sessionId = 'votre_session_id';
-  const apiKey = '7b45af8f71d63d716fa486d7d0abb8bd';
-
-  const addFavoriteMovie = async (movieId) => {
-    try {
-      const response = await fetch(`https://api.themoviedb.org/3/account/${accountId}/favorite?api_key=${apiKey}&session_id=${sessionId}`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-          media_type: 'movie',
-          media_id: movieId,
-          favorite: true
-        })
-      });
-
-      if (response.ok) {
-        console.log(`Movie ${movieId} added to favorites`);
-      } else {
-        console.error('Failed to add movie to favorites');
-      }
-    } catch (error) {
-      console.error('Error:', error);
-    }
-  };
+  const tmdbApiKey = '7b45af8f71d63d716fa486d7d0abb8bd'; // Clé API TMDB
+  const youtubeApiKey = 'AIzaSyDIGqLiH3uOgyP3ZekG62cGXWSs-HvsLRs'; // Clé API YouTube IFrame
 
   return (
     <div className="App">
       <Header />
       <Routes>
-        <Route path="/" element={<div>Page d'accueil</div>} />
-        <Route path="/favorites" element={<FavoriteMovies accountId={accountId} sessionId={sessionId} apiKey={apiKey} />} />
+        <Route path="/" element={
+          <div>
+            {/* <h1>Page d'accueil</h1> */}
+            <SuggestionsCarousel tmdbApiKey={tmdbApiKey} youtubeApiKey={youtubeApiKey} />
+          </div>
+        } />
+        <Route path="/favorites" element={<FavoriteMovies />} />
         <Route path="/profile" element={<ProfilePage />} />
       </Routes>
-      
     </div>
   );
 };
