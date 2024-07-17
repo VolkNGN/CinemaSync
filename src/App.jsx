@@ -6,7 +6,8 @@ import Header from './Components/Header/Header';
 import FavoriteMovies from './Components/FavoriteMovies';
 import ProfilePage from './Components/profil/ProfilePage';
 import SuggestionsCarousel from './Components/SuggestionsCarousel/SuggestionsCarousel';
-import Footer from './Components/Footer/Footer'; // Importez le composant Footer ici
+import MovieDetails from './Components/MovieDetails/MovieDetails';
+import Footer from './Components/Footer/Footer';
 import './App.css';
 
 const App = () => {
@@ -21,6 +22,7 @@ const App = () => {
                     <Route path="/" element={<SuggestionsCarousel tmdbApiKey={tmdbApiKey} youtubeApiKey={youtubeApiKey} />} />
                     <Route path="/favorites" element={<FavoriteMovies />} />
                     <Route path="/profile" element={<ProfilePage />} />
+                    <Route path="/movie/:id" element={<MovieDetails tmdbApiKey={tmdbApiKey} />} />
                 </Routes>
                 <Footer />
             </div>
@@ -29,3 +31,4 @@ const App = () => {
 };
 
 export default App;
+
