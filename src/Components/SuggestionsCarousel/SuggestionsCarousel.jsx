@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
+import { Link } from 'react-router-dom';
 import './SuggestionsCarousel.css'; // Importation des styles personnalisés
 
 const TMDB_API_URL = 'https://api.themoviedb.org/3';
@@ -82,11 +83,13 @@ const SuggestionsCarousel = ({ tmdbApiKey }) => {
       <Slider {...settings}>
         {movies.map(movie => (
           <div key={movie.id} className="movie-card">
-            <img src={`https://image.tmdb.org/t/p/w500/${movie.poster_path}`} alt={movie.title} />
-            <div className="movie-info">
-              <h3>{movie.title}</h3>
-              <p>Note : {movie.vote_average}</p>
-            </div>
+            <Link to={`/movie/${movie.id}`}>
+              <img src={`https://image.tmdb.org/t/p/w500/${movie.poster_path}`} alt={movie.title} />
+              <div className="movie-info">
+                <h3>{movie.title}</h3>
+                <p>Note : {movie.vote_average}</p>
+              </div>
+            </Link>
           </div>
         ))}
       </Slider>
