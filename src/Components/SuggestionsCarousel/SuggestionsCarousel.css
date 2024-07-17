@@ -1,73 +1,77 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;700&display=swap');
+
 .suggestions-container {
-  margin: 0px;
-  padding: 10px;
-  gap: 10px;
-  background-color: black;
+    margin: 0px;
+    padding: 10px;
+    gap: 10px;
+    background-color: black;
+    font-family: 'DM Sans', sans-serif; /* Applique la police DM Sans à tout le container */
 }
 
 h2 {
-  color: white; /* Couleur blanche pour le texte */
-  text-align: left; /* Aligne le texte à gauche */
-  margin-left: 20px; /* Espace à gauche du titre */
-  font-family: 'DM Sans'; /* Assurez-vous que la police est appliquée ici aussi */
+    color: white; /* Couleur blanche pour le texte */
+    text-align: left; /* Aligne le texte à gauche */
+    margin-left: 20px; /* Espace à gauche du titre */
+    font-family: 'DM Sans', sans-serif; /* Assurez-vous que la police est appliquée ici aussi */
 }
 
 .movie-card {
-  padding: 20px;
-  text-align: center;
-  position: relative;
-  overflow: hidden;
-  border: none; /* Supprimer la bordure noire lors du clic */
-  border-radius: 10px;
-  transition: transform 0.3s, width 0.3s, height 0.3s;
-  width: 200px; /* Largeur par défaut de la carte */
-  height: 400px; /* Hauteur par défaut de la carte */
-  cursor: pointer; /* Ajout du curseur pour indiquer que l'élément est draggable */
+    padding: 20px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    border: none; /* Supprimer la bordure noire lors du clic */
+    border-radius: 10px;
+    transition: transform 0.3s, width 0.3s, height 0.3s, scale 0.3s; /* Ajout de la transition pour la mise à l'échelle */
+    width: 200px; /* Largeur par défaut de la carte */
+    height: 400px; /* Hauteur par défaut de la carte */
+    cursor: pointer; /* Ajout du curseur pour indiquer que l'élément est draggable */
 }
 
 .movie-card img {
-  width: 100%;
-  height: 100%; /* Assurez-vous que l'image utilise toute la hauteur disponible */
-  border-radius: 10px;
-  transition: transform 0.3s, width 0.3s, height 0.3s;
+    width: 100%;
+    height: 100%; /* Assurez-vous que l'image utilise toute la hauteur disponible */
+    border-radius: 10px;
+    transition: transform 0.3s, width 0.3s, height 0.3s, scale 0.3s; /* Ajout de la transition pour la mise à l'échelle */
 }
 
 .movie-card:hover {
-  width: 400px; /* Largeur de la carte postale au survol */
+    transform: scale(1.1); /* Applique la mise à l'échelle lors du survol */
+    width: 400px; /* Largeur de la carte postale au survol */
 }
 
 .movie-info {
-  position: absolute;
-  top: 0; /* Ajuster pour correspondre à la hauteur de l'image */
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: rgba(0, 0, 0, 0.7);
-  color: white;
-  opacity: 0;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  padding: 20px;
-  transition: opacity 0.3s;
-  text-align: left;
-  z-index: 1; /* Garder le rating en premier plan */
+    position: absolute;
+    top: 0; /* Ajuster pour correspondre à la hauteur de l'image */
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.7);
+    color: white;
+    opacity: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    transition: opacity 0.3s;
+    text-align: left;
+    z-index: 1; /* Garder le rating en premier plan */
 }
 
 .movie-card:hover .movie-info,
 .movie-info.active {
-  opacity: 1; /* Afficher les informations supplémentaires au survol */
+    opacity: 1; /* Afficher les informations supplémentaires au survol */
 }
 
 .movie-info h3 {
-  margin-top: 10px;
-  font-size: 1.1em;
-  color: #fff;
+    margin-top: 10px;
+    font-size: 1.1em;
+    color: #fff;
 }
 
 .movie-info p {
-  font-size: 0.9em;
-  color: #ddd;
-  margin: 10px 0;
+    font-size: 0.9em;
+    color: #ddd;
+    margin: 10px 0;
 }
