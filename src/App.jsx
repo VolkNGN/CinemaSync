@@ -1,3 +1,4 @@
+
 import React from 'react'; // Importation de React
 import { Routes, Route } from 'react-router-dom'; // Importation des composants de routage
 import Header from './Components/Header/Header'; // Importation du composant Header
@@ -9,8 +10,8 @@ import TrendCarousel from './Components/TrendCarousel/TrendCarousel'; // Importa
 import './App.css'; // Importation des styles de l'application
 
 const App = () => {
-  const tmdbApiKey = '7b45af8f71d63d716fa486d7d0abb8bd'; // Clé API TMDB
-  const youtubeApiKey = 'AIzaSyDIGqLiH3uOgyP3ZekG62cGXWSs-HvsLRs'; // Clé API YouTube IFrame
+    const tmdbApiKey = '7b45af8f71d63d716fa486d7d0abb8bd'; // Clé API TMDB
+    const youtubeApiKey = 'AIzaSyDIGqLiH3uOgyP3ZekG62cGXWSs-HvsLRs'; // Clé API YouTube IFrame
 
   return (
     <div className="App">
@@ -28,6 +29,7 @@ const App = () => {
       </Routes>
     </div>
   );
+
 };
 
 export default App;

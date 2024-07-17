@@ -1,0 +1,45 @@
+/* src/Components/Footer/Footer.css */
+
+.footer {
+    background-color: black;
+    color: #fff;
+    padding: 20px 0;
+    text-align: center;
+}
+
+.logo-container {
+    margin-bottom: 10px;
+}
+
+.logo {
+    width: 63px; /* Ajustez la taille du logo selon vos besoins */
+    height: auto;
+}
+
+.footer-nav {
+    margin-top: 10px;
+}
+
+.footer-nav ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.footer-nav ul li {
+    display: inline-block;
+    margin-right: 20px;
+}
+
+.footer-nav ul li:last-child {
+    margin-right: 0;
+}
+
+.footer-nav ul li a {
+    color: #fff;
+    text-decoration: none;
+    font-size: 16px;
+}
+
+.footer-nav ul li a:hover {
+    text-decoration: underline;
+}
