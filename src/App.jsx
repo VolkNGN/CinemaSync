@@ -5,6 +5,7 @@ import FavoriteMovies from './Components/FavoriteMovies'; // Importation du comp
 import MovieList from './Components/MovieList'; // Importation du composant MovieList
 import ProfilePage from './Components/profil/ProfilePage'; // Importation du composant ProfilePage
 import SuggestionsCarousel from './Components/SuggestionsCarousel/SuggestionsCarousel'; // Importation du composant SuggestionsCarousel
+import TrendCarousel from './Components/TrendCarousel/TrendCarousel'; // Importation du composant TrendCarousel
 import './App.css'; // Importation des styles de l'application
 
 const App = () => {
@@ -19,6 +20,7 @@ const App = () => {
           <div>
             {/* <h1>Page d'accueil</h1> */}
             <SuggestionsCarousel tmdbApiKey={tmdbApiKey} youtubeApiKey={youtubeApiKey} />
+            <TrendCarousel tmdbApiKey={tmdbApiKey} youtubeApiKey={youtubeApiKey} />
           </div>
         } />
         <Route path="/favorites" element={<FavoriteMovies />} />
