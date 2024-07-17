@@ -19,7 +19,7 @@ const ProfilePage = () => {
           </div>
         </div>
         <div className="profile-settings">
-          <h3>Editer mon profil</h3>
+          <h3>Editer mes préférences</h3>
           <button>Langue</button>
           <button>Mot de passe</button>
           <button>Notifications</button>
