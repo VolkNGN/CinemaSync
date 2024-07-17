@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import './Header.css';
 import logo from '../Assets/logo.png';
 import profileImage from '../Assets/token Sidney.png';
@@ -17,14 +18,16 @@ const Header = () => {
             </nav>
             <div className="search">
                 <form action="" className="search-bar">
-                    <input type="search" name="search" pattern=".*\S.*" required />
+                    <input type="search" name="search" pattern=".*\\S.*" required />
                     <button className="search-btn" type="submit">
                         <span>Search</span>
                     </button>
                 </form>
             </div>
             <div className="profile">
-                <img src={profileImage} alt="Profile" />
+                <Link to="/profile">
+                    <img src={profileImage} alt="Profile" />
+                </Link>
             </div>
         </header>
     );

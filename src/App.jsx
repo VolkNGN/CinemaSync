@@ -1,11 +1,9 @@
-// src/App.jsx
 import React from 'react';
 import { Routes, Route } from 'react-router-dom';
-import Header from './Components/Header/Header' ;
+import Header from './Components/Header/Header';
 import FavoriteMovies from './Components/FavoriteMovies';
 import MovieList from './Components/MovieList';
 import ProfilePage from './Components/profil/ProfilePage';
-import NotFoundPage from './Components/Notfound/NotFoundPage';  // Mise à jour du chemin
 import './App.css';
 
 const App = () => {
@@ -39,17 +37,14 @@ const App = () => {
 
   return (
     <div className="App">
-
+      <Header />
       <Routes>
         <Route path="/" element={<div>Page d'accueil</div>} />
         <Route path="/favorites" element={<FavoriteMovies accountId={accountId} sessionId={sessionId} apiKey={apiKey} />} />
         <Route path="/profile" element={<ProfilePage />} />
-        <Route path="*" element={<NotFoundPage />} />
       </Routes>
-     
-      <MovieList addFavoriteMovie={addFavoriteMovie} />
+      
     </div>
- <Header />
   );
 };
 
