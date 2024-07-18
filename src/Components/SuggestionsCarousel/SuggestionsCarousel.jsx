@@ -135,7 +135,7 @@ const SuggestionsCarousel = ({ tmdbApiKey }) => {
               onClick={(event) => handleClick(event, movie.id)}
               draggable="false"
             >
-              <img src={`https://image.tmdb.org/t/p/w500/${movie.poster_path}`} alt={movie.title} />
+              <img src={`https://image.tmdb.org/t/p/w400/${movie.poster_path}`} alt={movie.title} />
               <div className="movie-info">
                 <h3>{movie.title}</h3>
                 <p>Note : {movie.vote_average}</p>
