@@ -8,13 +8,12 @@ import SuggestionsCarousel from './Components/SuggestionsCarousel/SuggestionsCar
 import TrendCarousel from './Components/TrendCarousel/TrendCarousel'; // Importation du composant TrendCarousel
 import MovieDetails from './Components/MovieDetails/MovieDetails';
 import Footer from './Components/Footer/Footer';
+import FavoritesCarousel from './Components/FavoritesCarousel/FavoritesCarousel'; // Importation du composant FavoritesCarousel
 import './App.css'; // Importation des styles de l'application
-
 
 const App = () => {
     const tmdbApiKey = '7b45af8f71d63d716fa486d7d0abb8bd'; // Clé API TMDB
     const youtubeApiKey = 'AIzaSyDIGqLiH3uOgyP3ZekG62cGXWSs-HvsLRs'; // Clé API YouTube IFrame
-
 
   return (
     <div className="App">
@@ -25,6 +24,7 @@ const App = () => {
             {/* <h1>Page d'accueil</h1> */}
             <SuggestionsCarousel tmdbApiKey={tmdbApiKey} youtubeApiKey={youtubeApiKey} />
             <TrendCarousel tmdbApiKey={tmdbApiKey} youtubeApiKey={youtubeApiKey} />
+            <FavoritesCarousel /> {/* Ajout du carousel des favoris */}
           </div>
         } />
         <Route path="/favorites" element={<FavoriteMovies />} />
@@ -34,8 +34,6 @@ const App = () => {
       <Footer />
     </div>
   );
-
 };
 
 export default App;
-
