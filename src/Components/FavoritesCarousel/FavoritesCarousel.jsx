@@ -3,51 +3,46 @@ import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import { Link } from 'react-router-dom';
-import './TrendCarousel.css';
+import './FavoritesCarousel.css'; // Assurez-vous de créer et de styliser ce fichier
 
-const TMDB_API_URL = 'https://api.themoviedb.org/3';
+const MAX_FAVORITES = 50;
 
-const TrendCarousel = ({ tmdbApiKey }) => {
-  const [movies, setMovies] = useState([]);
+const FavoritesCarousel = () => {
   const [favorites, setFavorites] = useState([]);
   const [isDragging, setIsDragging] = useState(false);
 
   useEffect(() => {
-    const fetchTrends = async () => {
-      const response = await fetch(`${TMDB_API_URL}/trending/movie/day?api_key=${tmdbApiKey}&language=fr-FR`);
-      if (response.ok) {
-        const data = await response.json();
-        setMovies(data.results);
-      } else {
-        console.error('Failed to fetch movies:', response.statusText);
-      }
-    };
-
-    fetchTrends();
-  }, [tmdbApiKey]);
-
-  useEffect(() => {
     const savedFavorites = JSON.parse(localStorage.getItem('favorites')) || [];
-    setFavorites(savedFavorites);
+    const uniqueFavorites = filterUniqueFavorites(savedFavorites);
+    setFavorites(uniqueFavorites);
   }, []);
 
-  const handleFavorite = (movie) => {
+  const filterUniqueFavorites = (movies) => {
+    const movieMap = new Map();
+    
+    movies.forEach(movie => {
+      if (!movieMap.has(movie.id)) {
+        movieMap.set(movie.id, movie);
+      }
+    });
+    
+    return Array.from(movieMap.values());
+  };
+
+  const handleFavorite = (movie, event) => {
+    event.stopPropagation(); // Empêche la propagation du clic vers le lien parent
     let updatedFavorites;
     if (favorites.some(fav => fav.id === movie.id)) {
       updatedFavorites = favorites.filter(fav => fav.id !== movie.id);
     } else {
-      updatedFavorites = [...favorites, movie];
+      if (favorites.length >= MAX_FAVORITES) {
+        alert(`Vous avez atteint la limite maximale de ${MAX_FAVORITES} favoris.`);
+        return;
+      }
+      updatedFavorites = filterUniqueFavorites([...favorites, movie]);
     }
     setFavorites(updatedFavorites);
     localStorage.setItem('favorites', JSON.stringify(updatedFavorites));
-  };
-
-  const handleClick = (event, movieId) => {
-    if (isDragging) {
-      event.preventDefault();
-      return;
-    }
-    window.location.href = `/movie/${movieId}`;
   };
 
   const handleMouseDown = () => {
@@ -58,6 +53,14 @@ const TrendCarousel = ({ tmdbApiKey }) => {
     setIsDragging(true);
   };
 
+  const handleClick = (event, movieId) => {
+    if (isDragging) {
+      event.preventDefault();
+      return;
+    }
+    window.location.href = `/movie/${movieId}`;
+  };
+
   const settings = {
     dots: false,
     infinite: true,
@@ -65,17 +68,17 @@ const TrendCarousel = ({ tmdbApiKey }) => {
     slidesToShow: 5,
     slidesToScroll: 3,
     autoplay: true,
-    autoplaySpeed: 4000,
+    autoplaySpeed: 5000,
     pauseOnHover: true,
     arrows: false,
-    draggable: true
+    draggable: true,
   };
 
   return (
-    <div className="trend-carousel-container">
-      <h2>Tendances</h2>
+    <div className="favorites-carousel-container">
+      <h2>Ma liste</h2>
       <Slider {...settings}>
-        {movies.map(movie => (
+        {favorites.map(movie => (
           <div key={movie.id} className="movie-card">
             <Link
               to="#"
@@ -88,7 +91,7 @@ const TrendCarousel = ({ tmdbApiKey }) => {
               <div className="movie-info">
                 <h3>{movie.title}</h3>
                 <p>Note : {movie.vote_average}</p>
-                <button className="favorite-button" onClick={(e) => {e.preventDefault(); handleFavorite(movie);}}>
+                <button className="favorite-button" onClick={(e) => handleFavorite(movie, e)}>
                   {favorites.some(fav => fav.id === movie.id) ? '★' : '☆'}
                 </button>
               </div>
@@ -100,4 +103,4 @@ const TrendCarousel = ({ tmdbApiKey }) => {
   );
 };
 
-export default TrendCarousel;
+export default FavoritesCarousel;

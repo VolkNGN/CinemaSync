@@ -1,0 +1,54 @@
+/* src/Components/MovieDetails/MovieDetails.css */
+
+.movie-details {
+  position: relative;
+  background-size: cover;
+  background-position: center;
+  height: 900px;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.movie-details-content {
+  background-color: rgba(0, 0, 0, 0.6);
+  padding: 20px;
+  border-radius: 10px;
+  max-width: 600px;
+  text-align: left;
+}
+
+.movie-title {
+  font-size: 3em;
+  margin-bottom: 20px;
+}
+
+.movie-buttons {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.movie-button {
+  background-color: black;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.movie-button:hover {
+  background-color: #333;
+}
+
+.movie-info p {
+  margin: 5px 0;
+}
+
+.movie-synopsis {
+  margin-top: 20px;
+  line-height: 1.5;
+}

@@ -75,3 +75,19 @@ h2 {
     color: #ddd;
     margin: 10px 0;
 }
+
+/* Style du bouton de favoris */
+.favorite-button {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: none;
+    border: none;
+    color: white;
+    font-size: 1.5em;
+    cursor: pointer;
+}
+
+.favorite-button:focus {
+    outline: none;
+}

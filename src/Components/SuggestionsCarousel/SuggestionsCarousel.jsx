@@ -2,12 +2,15 @@ import React, { useEffect, useState } from 'react';
 import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
+import { Link } from 'react-router-dom';
 import './SuggestionsCarousel.css'; // Importation des styles personnalisés
 
 const TMDB_API_URL = 'https://api.themoviedb.org/3';
 
 const SuggestionsCarousel = ({ tmdbApiKey }) => {
   const [movies, setMovies] = useState([]); // État pour stocker les films
+  const [favorites, setFavorites] = useState([]);
+  const [isDragging, setIsDragging] = useState(false); // État pour vérifier le glissement
 
   const sortByOptions = [
     'popularity.desc',
@@ -41,26 +44,78 @@ const SuggestionsCarousel = ({ tmdbApiKey }) => {
 
   const getRandomElement = (array) => array[Math.floor(Math.random() * array.length)];
 
-  // Chargement des films depuis l'API TMDB au montage du composant
-  useEffect(() => {
-    const fetchSuggestions = async () => {
-      const sortBy = getRandomElement(sortByOptions);
-      const genre = getRandomElement(genreOptions);
-      const page = Math.floor(Math.random() * 10) + 1; // Random page between 1 and 10
+  // Fonction pour filtrer les films indésirables
+  const filterMovies = (movies) => {
+    return movies.filter(movie => 
+      movie.vote_average > 0 && 
+      movie.vote_average < 10 &&
+      movie.overview &&
+      movie.poster_path
+    );
+  };
 
-      const url = `${TMDB_API_URL}/discover/movie?api_key=${tmdbApiKey}&include_adult=false&include_video=false&language=fr-FR&page=${page}&sort_by=${sortBy}&with_genres=${genre}`;
+  // Fonction pour charger les suggestions
+  const fetchSuggestions = async () => {
+    const sortBy = getRandomElement(sortByOptions);
+    const genre = getRandomElement(genreOptions);
+    let page = 1;
+    let allMovies = [];
+    let filteredMovies = [];
+
+    while (filteredMovies.length < 10 && page <= 3) {
+      const url = `${TMDB_API_URL}/discover/movie?api_key=${tmdbApiKey}&include_adult=false&include_video=false&language=fr-FR&page=${page}&sort_by=${sortBy}&with_genres=${genre}&primary_release_date.gte=2000-01-01&primary_release_date.lte=${new Date().getFullYear()}-12-31&vote_count.gte=50`;
       const response = await fetch(url);
       if (response.ok) {
-        const data = await response.json(); // Récupération des données JSON de la réponse
-        setMovies(data.results); // Mise à jour de l'état movies avec les résultats
-        console.log(data);
+        const data = await response.json();
+        const newMovies = data.results;
+        allMovies = allMovies.concat(newMovies);
+        filteredMovies = filterMovies(allMovies);
+        console.log(`Page ${page}: Fetched ${newMovies.length} movies, ${filteredMovies.length} after filtering`);
+        page++;
       } else {
-        console.error('Failed to fetch movies:', response.statusText); // Affichage d'une erreur si la requête échoue
+        console.error('Failed to fetch movies:', response.statusText);
+        break;
       }
-    };
+    }
 
-    fetchSuggestions(); // Appel de la fonction pour récupérer les films
-  }, [tmdbApiKey]); // Dépendance à la clé API TMDB
+    // Assouplir les critères si aucune suggestion n'est trouvée
+    if (filteredMovies.length === 0) {
+      filteredMovies = allMovies.filter(movie => movie.poster_path);
+      console.log('Total movies after relaxed filtering:', filteredMovies.length);
+    }
+
+    setMovies(filteredMovies);
+  };
+
+  // Chargement des films depuis l'API TMDB au montage du composant
+  useEffect(() => {
+    fetchSuggestions();
+  }, [tmdbApiKey]);
+
+  // Gestionnaires d'événements pour gérer le drag
+  const handleMouseDown = () => {
+    setIsDragging(false);
+  };
+
+  const handleMouseMove = () => {
+    setIsDragging(true);
+  };
+
+  const handleClick = (event, movieId) => {
+    if (isDragging) {
+      event.preventDefault();
+      return;
+    }
+    window.location.href = `/movie/${movieId}`;
+  };
+
+  const handleFavorite = (movie) => {
+    if (favorites.some(fav => fav.id === movie.id)) {
+      setFavorites(favorites.filter(fav => fav.id !== movie.id));
+    } else {
+      setFavorites([...favorites, movie]);
+    }
+  };
 
   // Configuration du carrousel slick
   const settings = {
@@ -70,7 +125,7 @@ const SuggestionsCarousel = ({ tmdbApiKey }) => {
     slidesToShow: 5,
     slidesToScroll: 3,
     autoplay: true,
-    autoplaySpeed: 4000,
+    autoplaySpeed: 5000,
     pauseOnHover: true,
     arrows: false, // Supprimer les flèches de navigation
     draggable: true // Activer le drag and move
@@ -82,11 +137,23 @@ const SuggestionsCarousel = ({ tmdbApiKey }) => {
       <Slider {...settings}>
         {movies.map(movie => (
           <div key={movie.id} className="movie-card">
-            <img src={`https://image.tmdb.org/t/p/w500/${movie.poster_path}`} alt={movie.title} />
-            <div className="movie-info">
-              <h3>{movie.title}</h3>
-              <p>Note : {movie.vote_average}</p>
-            </div>
+            <Link
+              to="#"
+              onMouseDown={handleMouseDown}
+              onMouseMove={handleMouseMove}
+              onClick={(event) => handleClick(event, movie.id)}
+              draggable="false"
+            >
+              <img src={`https://image.tmdb.org/t/p/w400/${movie.poster_path}`} alt={movie.title} />
+              <div className="movie-info">
+                <h3>{movie.title}</h3>
+                <p>Note : {movie.vote_average}</p>
+                <button className="favorite-button" onClick={(e) => handleFavorite(movie, e)}>
+                  {favorites.some(fav => fav.id === movie.id) ? '★' : '☆'}
+                </button>
+                
+              </div>
+            </Link>
           </div>
         ))}
       </Slider>
