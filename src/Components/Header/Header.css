@@ -47,7 +47,7 @@ body {
     text-align: center; /* Centrage du texte */
 }
 
-.header nav {
+.header-nav {
     display: flex;
     align-items: center;
     flex-grow: 1;
@@ -55,15 +55,15 @@ body {
     padding:25 px;
 }
 
-.header nav a {
+.header-nav a {
     margin: 0 15px;
     text-decoration: none;
     color: white;
     font-size: 32px;
 }
 
-.header nav a:hover {
-    color: #007BFF;
+.header-nav a:hover {
+    color: #ff0000;
     display: inline-flex;
 }
 
