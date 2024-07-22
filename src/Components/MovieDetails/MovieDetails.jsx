@@ -9,6 +9,7 @@ const MovieDetails = ({ tmdbApiKey }) => {
   const { id } = useParams(); // Récupère l'ID du film depuis les paramètres de l'URL
   const [movie, setMovie] = useState(null);
   const [trailerUrl, setTrailerUrl] = useState('');
+  const [favorites, setFavorites] = useState([]);
 
   useEffect(() => {
     const fetchMovieDetails = async () => {
@@ -35,6 +36,23 @@ const MovieDetails = ({ tmdbApiKey }) => {
     fetchMovieDetails();
   }, [id, tmdbApiKey]);
 
+  useEffect(() => {
+    // Charger les favoris depuis le localStorage
+    const savedFavorites = JSON.parse(localStorage.getItem('favorites')) || [];
+    setFavorites(savedFavorites);
+  }, []);
+
+  const handleFavoriteToggle = () => {
+    let updatedFavorites;
+    if (favorites.some(fav => fav.id === movie.id)) {
+      updatedFavorites = favorites.filter(fav => fav.id !== movie.id);
+    } else {
+      updatedFavorites = [...favorites, movie];
+    }
+    setFavorites(updatedFavorites);
+    localStorage.setItem('favorites', JSON.stringify(updatedFavorites));
+  };
+
   const openTrailerModal = () => {
     const modal = document.getElementById('trailer-modal');
     modal.style.display = 'block';
@@ -59,8 +77,8 @@ const MovieDetails = ({ tmdbApiKey }) => {
         <h1 className="movie-title">{movie.title}</h1>
         <div className="movie-buttons">
           <button className="movie-button" onClick={openTrailerModal}>Lire</button>
-          <button className="movie-button">
-            <FaStar /> {/* Utilisation de l'icône d'étoile */}
+          <button className="movie-button" onClick={handleFavoriteToggle}>
+            <FaStar color={favorites.some(fav => fav.id === movie.id) ? 'yellow' : 'white'} />
           </button>
           <button className="movie-button">Note : {roundedVoteAverage * 10}%</button>
         </div>
