@@ -12,10 +12,12 @@ const Header = () => {
             </div>
             <p className="moviesync">Moviesync</p>
             <nav>
-                <a href="/home">Accueil</a>
-                <a href="/movies">Mes films</a>
-                <a href="/series">Mes séries</a>
-            </nav>
+    <ul class="header-nav">
+        <li><Link to="/">Accueil</Link></li>
+        <li><Link to="/movies">Mes films</Link></li>
+        <li><Link to="/series">Mes séries</Link></li>
+    </ul>
+</nav>
             <div className="search">
                 <form action="" className="search-bar">
                     <input type="search" name="search" pattern=".*\\S.*" required />
