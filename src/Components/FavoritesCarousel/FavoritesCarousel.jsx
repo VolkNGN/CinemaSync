@@ -17,21 +17,6 @@ const filterUniqueFavorites = (movies) => {
   return Array.from(movieMap.values());
 };
 
-const handleFavorite = (movie, favorites, setFavorites) => {
-  let updatedFavorites;
-  if (favorites.some(fav => fav.id === movie.id)) {
-    updatedFavorites = favorites.filter(fav => fav.id !== movie.id);
-  } else {
-    if (favorites.length >= MAX_FAVORITES) {
-      alert(`Vous avez atteint la limite maximale de ${MAX_FAVORITES} favoris.`);
-      return;
-    }
-    updatedFavorites = filterUniqueFavorites([...favorites, movie]);
-  }
-  setFavorites(updatedFavorites);
-  localStorage.setItem('favorites', JSON.stringify(updatedFavorites));
-};
-
 const FavoritesCarousel = () => {
   const [favorites, setFavorites] = useState([]);
   const [isDragging, setIsDragging] = useState(false);
