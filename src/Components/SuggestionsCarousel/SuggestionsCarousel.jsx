@@ -9,7 +9,6 @@ const TMDB_API_URL = 'https://api.themoviedb.org/3';
 
 const SuggestionsCarousel = ({ tmdbApiKey }) => {
   const [movies, setMovies] = useState([]); // État pour stocker les films
-  const [favorites, setFavorites] = useState([]);
   const [isDragging, setIsDragging] = useState(false); // État pour vérifier le glissement
 
   const sortByOptions = [
@@ -109,14 +108,6 @@ const SuggestionsCarousel = ({ tmdbApiKey }) => {
     window.location.href = `/movie/${movieId}`;
   };
 
-  const handleFavorite = (movie) => {
-    if (favorites.some(fav => fav.id === movie.id)) {
-      setFavorites(favorites.filter(fav => fav.id !== movie.id));
-    } else {
-      setFavorites([...favorites, movie]);
-    }
-  };
-
   // Configuration du carrousel slick
   const settings = {
     dots: false,
@@ -148,10 +139,6 @@ const SuggestionsCarousel = ({ tmdbApiKey }) => {
               <div className="movie-info">
                 <h3>{movie.title}</h3>
                 <p>Note : {movie.vote_average}</p>
-                <button className="favorite-button" onClick={(e) => handleFavorite(movie, e)}>
-                  {favorites.some(fav => fav.id === movie.id) ? '★' : '☆'}
-                </button>
-                
               </div>
             </Link>
           </div>

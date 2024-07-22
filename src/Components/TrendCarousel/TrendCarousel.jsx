@@ -9,7 +9,6 @@ const TMDB_API_URL = 'https://api.themoviedb.org/3';
 
 const TrendCarousel = ({ tmdbApiKey }) => {
   const [movies, setMovies] = useState([]);
-  const [favorites, setFavorites] = useState([]);
   const [isDragging, setIsDragging] = useState(false);
 
   useEffect(() => {
@@ -25,22 +24,6 @@ const TrendCarousel = ({ tmdbApiKey }) => {
 
     fetchTrends();
   }, [tmdbApiKey]);
-
-  useEffect(() => {
-    const savedFavorites = JSON.parse(localStorage.getItem('favorites')) || [];
-    setFavorites(savedFavorites);
-  }, []);
-
-  const handleFavorite = (movie) => {
-    let updatedFavorites;
-    if (favorites.some(fav => fav.id === movie.id)) {
-      updatedFavorites = favorites.filter(fav => fav.id !== movie.id);
-    } else {
-      updatedFavorites = [...favorites, movie];
-    }
-    setFavorites(updatedFavorites);
-    localStorage.setItem('favorites', JSON.stringify(updatedFavorites));
-  };
 
   const handleClick = (event, movieId) => {
     if (isDragging) {
@@ -88,9 +71,6 @@ const TrendCarousel = ({ tmdbApiKey }) => {
               <div className="movie-info">
                 <h3>{movie.title}</h3>
                 <p>Note : {movie.vote_average}</p>
-                <button className="favorite-button" onClick={(e) => {e.preventDefault(); handleFavorite(movie);}}>
-                  {favorites.some(fav => fav.id === movie.id) ? '★' : '☆'}
-                </button>
               </div>
             </Link>
           </div>

@@ -7,6 +7,31 @@ import './FavoritesCarousel.css'; // Assurez-vous de créer et de styliser ce fi
 
 const MAX_FAVORITES = 50;
 
+const filterUniqueFavorites = (movies) => {
+  const movieMap = new Map();
+  movies.forEach(movie => {
+    if (!movieMap.has(movie.id)) {
+      movieMap.set(movie.id, movie);
+    }
+  });
+  return Array.from(movieMap.values());
+};
+
+const handleFavorite = (movie, favorites, setFavorites) => {
+  let updatedFavorites;
+  if (favorites.some(fav => fav.id === movie.id)) {
+    updatedFavorites = favorites.filter(fav => fav.id !== movie.id);
+  } else {
+    if (favorites.length >= MAX_FAVORITES) {
+      alert(`Vous avez atteint la limite maximale de ${MAX_FAVORITES} favoris.`);
+      return;
+    }
+    updatedFavorites = filterUniqueFavorites([...favorites, movie]);
+  }
+  setFavorites(updatedFavorites);
+  localStorage.setItem('favorites', JSON.stringify(updatedFavorites));
+};
+
 const FavoritesCarousel = () => {
   const [favorites, setFavorites] = useState([]);
   const [isDragging, setIsDragging] = useState(false);
@@ -16,34 +41,6 @@ const FavoritesCarousel = () => {
     const uniqueFavorites = filterUniqueFavorites(savedFavorites);
     setFavorites(uniqueFavorites);
   }, []);
-
-  const filterUniqueFavorites = (movies) => {
-    const movieMap = new Map();
-    
-    movies.forEach(movie => {
-      if (!movieMap.has(movie.id)) {
-        movieMap.set(movie.id, movie);
-      }
-    });
-    
-    return Array.from(movieMap.values());
-  };
-
-  const handleFavorite = (movie, event) => {
-    event.stopPropagation(); // Empêche la propagation du clic vers le lien parent
-    let updatedFavorites;
-    if (favorites.some(fav => fav.id === movie.id)) {
-      updatedFavorites = favorites.filter(fav => fav.id !== movie.id);
-    } else {
-      if (favorites.length >= MAX_FAVORITES) {
-        alert(`Vous avez atteint la limite maximale de ${MAX_FAVORITES} favoris.`);
-        return;
-      }
-      updatedFavorites = filterUniqueFavorites([...favorites, movie]);
-    }
-    setFavorites(updatedFavorites);
-    localStorage.setItem('favorites', JSON.stringify(updatedFavorites));
-  };
 
   const handleMouseDown = () => {
     setIsDragging(false);
@@ -68,34 +65,32 @@ const FavoritesCarousel = () => {
     slidesToShow: 5,
     slidesToScroll: 3,
     autoplay: true,
-    autoplaySpeed: 5000,
+    autoplaySpeed: 4000,
     pauseOnHover: true,
     arrows: false,
-    draggable: true,
+    draggable: true
   };
 
   return (
-    <div className="favorites-carousel-container">
-      <h2>Ma liste</h2>
+    <div className="favorites-carousel">
       <Slider {...settings}>
         {favorites.map(movie => (
-          <div key={movie.id} className="movie-card">
-            <Link
-              to="#"
+          <div key={movie.id} className="carousel-item">
+            <div
+              className="movie-card"
               onMouseDown={handleMouseDown}
               onMouseMove={handleMouseMove}
               onClick={(event) => handleClick(event, movie.id)}
-              draggable="false"
             >
-              <img src={`https://image.tmdb.org/t/p/w400/${movie.poster_path}`} alt={movie.title} />
-              <div className="movie-info">
-                <h3>{movie.title}</h3>
-                <p>Note : {movie.vote_average}</p>
-                <button className="favorite-button" onClick={(e) => handleFavorite(movie, e)}>
-                  {favorites.some(fav => fav.id === movie.id) ? '★' : '☆'}
-                </button>
-              </div>
-            </Link>
+              <img
+                src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
+                alt={movie.title}
+                className="movie-poster"
+              />
+              <h3 className="movie-title">{movie.title}</h3>
+              <p className="movie-overview">{movie.overview}</p>
+              <Link to={`/movie/${movie.id}`} className="details-link">Voir les détails</Link>
+            </div>
           </div>
         ))}
       </Slider>
