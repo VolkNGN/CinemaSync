@@ -2,13 +2,14 @@ import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { FaStar } from 'react-icons/fa'; // Import de l'icône d'étoile
 import './MovieDetails.css'; // Importation des styles
-import '../SuggestionsCarousel/SuggestionsCarousel'
+import '../SuggestionsCarousel/SuggestionsCarousel';
 const TMDB_API_URL = 'https://api.themoviedb.org/3';
 
 const MovieDetails = ({ tmdbApiKey }) => {
   const { id } = useParams(); // Récupère l'ID du film depuis les paramètres de l'URL
   const [movie, setMovie] = useState(null);
   const [trailerUrl, setTrailerUrl] = useState('');
+  const [savedTrailerUrl, setSavedTrailerUrl] = useState(''); // Nouvelle variable pour stocker l'URL de la bande-annonce
   const [favorites, setFavorites] = useState([]);
   
   useEffect(() => {
@@ -25,7 +26,7 @@ const MovieDetails = ({ tmdbApiKey }) => {
           const videoData = await videoResponse.json();
           const trailer = videoData.results.find(video => video.type === 'Trailer' && video.site === 'YouTube');
           if (trailer) {
-            setTrailerUrl(`https://www.youtube.com/embed/${trailer.key}`);
+            setSavedTrailerUrl(`https://www.youtube.com/embed/${trailer.key}`);
           }
         }
       } else {
@@ -55,12 +56,14 @@ const MovieDetails = ({ tmdbApiKey }) => {
 
   const openTrailerModal = () => {
     const modal = document.getElementById('trailer-modal');
+    setTrailerUrl(savedTrailerUrl); // Réapplique l'URL sauvegardée de la bande-annonce
     modal.style.display = 'block';
   };
 
   const closeTrailerModal = () => {
     const modal = document.getElementById('trailer-modal');
     modal.style.display = 'none';
+    setTrailerUrl(''); // Réinitialise l'URL de la bande-annonce pour arrêter la vidéo
   };
 
   if (!movie) {
@@ -95,15 +98,17 @@ const MovieDetails = ({ tmdbApiKey }) => {
       <div id="trailer-modal" className="modal">
         <div className="modal-content">
           <span className="close" onClick={closeTrailerModal}>&times;</span>
-          <iframe
-            width="560"
-            height="315"
-            src={trailerUrl}
-            title="YouTube video player"
-            frameBorder="0"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-            allowFullScreen
-          ></iframe>
+          {trailerUrl && (
+            <iframe
+              width="560"
+              height="315"
+              src={trailerUrl}
+              title="YouTube video player"
+              frameBorder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowFullScreen
+            ></iframe>
+          )}
         </div>
       </div>
     </div>
