@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { FaStar } from 'react-icons/fa'; // Import de l'icône d'étoile
 import './MovieDetails.css'; // Importation des styles
-
+import '../SuggestionsCarousel/SuggestionsCarousel'
 const TMDB_API_URL = 'https://api.themoviedb.org/3';
 
 const MovieDetails = ({ tmdbApiKey }) => {
@@ -10,7 +10,7 @@ const MovieDetails = ({ tmdbApiKey }) => {
   const [movie, setMovie] = useState(null);
   const [trailerUrl, setTrailerUrl] = useState('');
   const [favorites, setFavorites] = useState([]);
-
+  
   useEffect(() => {
     const fetchMovieDetails = async () => {
       // Fetch les détails du film

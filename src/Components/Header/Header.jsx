@@ -14,8 +14,7 @@ const Header = () => {
             <nav>
     <ul class="header-nav">
         <li><Link to="/">Accueil</Link></li>
-        <li><Link to="/movies">Mes films</Link></li>
-        <li><Link to="/series">Mes séries</Link></li>
+        <li><Link to="/my-movies">Ma Watchlist</Link></li>
     </ul>
 </nav>
             <div className="search">
