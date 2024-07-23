@@ -139,6 +139,7 @@ const SuggestionsCarousel = ({ tmdbApiKey }) => {
               <div className="movie-info">
                 <h3>{movie.title}</h3>
                 <p>Note : {movie.vote_average}</p>
+                <Link to={`/movie/${movie.id}`} className="details-link">détails</Link>
               </div>
             </Link>
           </div>
