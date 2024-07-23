@@ -1,10 +1,22 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import './Header.css';
 import logo from '../Assets/logo.png';
 import profileImage from '../Assets/token Sidney.png';
 
-const Header = () => {
+const Header = ({ onSearch }) => {
+    const [query, setQuery] = useState('');
+
+    const handleInputChange = (e) => {
+        setQuery(e.target.value);
+    };
+
+    const handleSearch = (e) => {
+        e.preventDefault();
+        console.log('Search query:', query); // Ajout du console.log pour vérifier la recherche
+        onSearch(query);
+    };
+
     return (
         <header className="header">
             <div className="logo">
@@ -12,14 +24,20 @@ const Header = () => {
             </div>
             <p className="moviesync">Moviesync</p>
             <nav>
-    <ul class="header-nav">
-        <li><Link to="/">Accueil</Link></li>
-        <li><Link to="/my-movies">Ma Watchlist</Link></li>
-    </ul>
-</nav>
+                <ul className="header-nav">
+                    <li><Link to="/">Accueil</Link></li>
+                    <li><Link to="/my-movies">Ma Watchlist</Link></li>
+                </ul>
+            </nav>
             <div className="search">
-                <form action="" className="search-bar">
-                    <input type="search" name="search" pattern=".*\\S.*" required />
+                <form className="search-bar" onSubmit={handleSearch}>
+                    <input
+                        type="search"
+                        name="search"
+                        value={query}
+                        onChange={handleInputChange}
+                        required
+                    />
                     <button className="search-btn" type="submit">
                         <span>Search</span>
                     </button>
