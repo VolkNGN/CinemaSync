@@ -12,7 +12,6 @@ MovieSync est une application web développée avec React permettant aux utilisa
 - [Technologies](#technologies)
 - [Installation](#installation)
 - [Utilisation](#utilisation)
-- [Structure du Projet](#structure-du-projet)
 - [Contributions](#contributions)
 
 ## Aperçu
@@ -25,6 +24,7 @@ MovieSync offre une interface conviviale pour explorer les films populaires, les
 - Ajout et suppression de films dans les favoris.
 - Visualisation des détails des films y compris les bandes-annonces.
 - Interface utilisateur réactive et conviviale.
+- barre de recherche opérationnelle vous permettant de trouver votre bonheur.
 
 ## Technologies
 
@@ -63,52 +63,4 @@ Lancez l'application :
 bash
 Copier le code
 npm start
-Ouvrez votre navigateur et accédez à http://localhost:3000.
-
-
-## Structure du Projet
-bash
-Copier le code
-MovieSync/
-├── public/
-│   ├── index.html
-│   └── ...
-├── src/
-│   ├── components/
-│   │   ├── Header/
-│   │   │   ├── Header.jsx
-│   │   │   └── Header.css
-│   │   ├── BackgroundAccueil/
-│   │   │   ├── BackgroundAccueil.jsx
-│   │   │   └── BackgroundAccueil.css
-│   │   ├── FavoriteMovies.jsx
-│   │   ├── MovieList.jsx
-│   │   ├── ProfilePage.jsx
-│   │   ├── SuggestionsCarousel/
-│   │   │   ├── SuggestionsCarousel.jsx
-│   │   │   └── SuggestionsCarousel.css
-│   │   ├── TrendCarousel/
-│   │   │   ├── TrendCarousel.jsx
-│   │   │   └── TrendCarousel.css
-│   │   ├── MovieDetails/
-│   │   │   ├── MovieDetails.jsx
-│   │   │   └── MovieDetails.css
-│   │   └── Footer/
-│   │       ├── Footer.jsx
-│   │       └── Footer.css
-│   ├── App.jsx
-│   ├── App.css
-│   ├── index.jsx
-│   └── ...
-├── .env
-├── package.json
-└── README.md
-
-## Contributions :) 
-Les contributions sont les bienvenues ! Si vous souhaitez contribuer, veuillez suivre les étapes suivantes :
-
-Forkez le projet.
-Créez une branche pour votre fonctionnalité (git checkout -b feature/nouvelle-fonctionnalité).
-Commitez vos modifications (git commit -m 'Ajout de nouvelle fonctionnalité').
-Poussez votre branche (git push origin feature/nouvelle-fonctionnalité).
-Ouvrez une Pull Request.
+Ouvrez votre navigateur et accédez à http://localhost:3000, ou un autre port de votre ordinateur.
