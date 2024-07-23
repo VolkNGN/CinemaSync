@@ -1,6 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;700&display=swap');
 
-.suggestions-container {
+.favorites-container {
     margin: 0px;
     padding: 10px;
     gap: 10px;
@@ -65,7 +65,7 @@ h2 {
 }
 
 .movie-info h3 {
-  text-align: center;
+    text-align: center;
     margin-top: 10px;
     font-size: 1.1em;
     color: #fff;
@@ -77,18 +77,28 @@ h2 {
     margin: 10px 0;
 }
 
-/* Style du bouton de favoris */
-.favorite-button {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    background: none;
-    border: none;
-    color: white;
-    font-size: 1.5em;
-    cursor: pointer;
+.details-link {
+    position: relative;
+    border-radius: 50px;
+    background-color: #000;
+    width: 35%;
+    overflow: hidden;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    padding: 6px 10px;
+    box-sizing: border-box;
+    text-align: center;
+    font-size: 12px;
+    color: #fff;
+    font-family: 'DM Sans';
+    text-decoration:none;
+    transition: background-color 0.3s, transform 0.3s;
 }
 
-.favorite-button:focus {
-    outline: none;
+.details-link:hover {
+    background-color: #333;
+    transform: scale(1.00);
 }
+

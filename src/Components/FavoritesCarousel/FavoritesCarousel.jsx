@@ -3,19 +3,7 @@ import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import { Link } from 'react-router-dom';
-import './FavoritesCarousel.css'; // Assurez-vous de créer et de styliser ce fichier
-
-const MAX_FAVORITES = 50;
-
-const filterUniqueFavorites = (movies) => {
-  const movieMap = new Map();
-  movies.forEach(movie => {
-    if (!movieMap.has(movie.id)) {
-      movieMap.set(movie.id, movie);
-    }
-  });
-  return Array.from(movieMap.values());
-};
+import './FavoritesCarousel.css';
 
 const FavoritesCarousel = () => {
   const [favorites, setFavorites] = useState([]);
@@ -24,15 +12,30 @@ const FavoritesCarousel = () => {
   useEffect(() => {
     const savedFavorites = JSON.parse(localStorage.getItem('favorites')) || [];
     const uniqueFavorites = filterUniqueFavorites(savedFavorites);
-    setFavorites(uniqueFavorites);
+    const filteredFavorites = filterMovies(uniqueFavorites);
+    setFavorites(filteredFavorites);
   }, []);
 
-  const handleMouseDown = () => {
-    setIsDragging(false);
+  const filterUniqueFavorites = (favorites) => {
+    const uniqueFavorites = [];
+    const movieIds = new Set();
+
+    favorites.forEach((movie) => {
+      if (!movieIds.has(movie.id)) {
+        movieIds.add(movie.id);
+        uniqueFavorites.push(movie);
+      }
+    });
+
+    return uniqueFavorites;
   };
 
-  const handleMouseMove = () => {
-    setIsDragging(true);
+  const filterMovies = (favorites) => {
+    return favorites.filter((movie) =>
+      movie.vote_average >= 6 &&
+      movie.overview &&
+      movie.poster_path
+    );
   };
 
   const handleClick = (event, movieId) => {
@@ -43,12 +46,20 @@ const FavoritesCarousel = () => {
     window.location.href = `/movie/${movieId}`;
   };
 
+  const handleMouseDown = () => {
+    setIsDragging(false);
+  };
+
+  const handleMouseMove = () => {
+    setIsDragging(true);
+  };
+
   const settings = {
     dots: false,
-    infinite: true,
+    infinite: false,
     speed: 500,
     slidesToShow: 5,
-    slidesToScroll: 3,
+    slidesToScroll: 2,
     autoplay: true,
     autoplaySpeed: 4000,
     pauseOnHover: true,
@@ -58,24 +69,24 @@ const FavoritesCarousel = () => {
 
   return (
     <div className="favorites-carousel">
+      <h2>Mes favoris</h2>
       <Slider {...settings}>
         {favorites.map(movie => (
-          <div key={movie.id} className="carousel-item">
-            <div
-              className="movie-card"
+          <div key={movie.id} className="movie-card">
+            <Link
+              to="#"
               onMouseDown={handleMouseDown}
               onMouseMove={handleMouseMove}
               onClick={(event) => handleClick(event, movie.id)}
+              draggable="false"
             >
-              <img
-                src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
-                alt={movie.title}
-                className="movie-poster"
-              />
-              <h3 className="movie-title">{movie.title}</h3>
-              <p className="movie-overview">{movie.overview}</p>
-              <Link to={`/movie/${movie.id}`} className="details-link">Voir les détails</Link>
-            </div>
+              <img src={`https://image.tmdb.org/t/p/w400/${movie.poster_path}`} alt={movie.title} />
+              <div className="movie-info">
+                <h3>{movie.title}</h3>
+                <p>Note : {movie.vote_average}</p>
+                <Link to={`/movie/${movie.id}`} className="details-link">Détails</Link>
+              </div>
+            </Link>
           </div>
         ))}
       </Slider>
