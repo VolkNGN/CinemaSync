@@ -9,13 +9,14 @@ import TrendCarousel from './Components/TrendCarousel/TrendCarousel'; // Importa
 import MovieDetails from './Components/MovieDetails/MovieDetails';
 import Footer from './Components/Footer/Footer';
 import FavoritesCarousel from './Components/FavoritesCarousel/FavoritesCarousel'; // Importation du composant FavoritesCarousel
+import MyMovies from './Components/MyMovies/MyMovies';
 import './App.css'; // Importation des styles de l'application
 
 const App = () => {
     const tmdbApiKey = '7b45af8f71d63d716fa486d7d0abb8bd'; // Clé API TMDB
     const youtubeApiKey = 'AIzaSyDIGqLiH3uOgyP3ZekG62cGXWSs-HvsLRs'; // Clé API YouTube IFrame
 
-  return (
+  return ( 
     <div className="App">
       <Header />
       <Routes>
@@ -24,12 +25,13 @@ const App = () => {
             {/* <h1>Page d'accueil</h1> */}
             <SuggestionsCarousel tmdbApiKey={tmdbApiKey} youtubeApiKey={youtubeApiKey} />
             <TrendCarousel tmdbApiKey={tmdbApiKey} youtubeApiKey={youtubeApiKey} />
-            <FavoritesCarousel /> {/* Ajout du carousel des favoris */}
+            <FavoritesCarousel  />
           </div>
         } />
         <Route path="/favorites" element={<FavoriteMovies />} />
         <Route path="/profile" element={<ProfilePage />} />
         <Route path="/movie/:id" element={<MovieDetails tmdbApiKey={tmdbApiKey} />} />
+        <Route path="/my-movies" element={<MyMovies />} />
       </Routes>
       <Footer />
     </div>

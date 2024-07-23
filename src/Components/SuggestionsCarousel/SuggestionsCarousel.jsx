@@ -10,6 +10,7 @@ const TMDB_API_URL = 'https://api.themoviedb.org/3';
 const SuggestionsCarousel = ({ tmdbApiKey }) => {
   const [movies, setMovies] = useState([]); // État pour stocker les films
   const [isDragging, setIsDragging] = useState(false); // État pour vérifier le glissement
+  
 
   const sortByOptions = [
     'popularity.desc',
@@ -138,7 +139,7 @@ const SuggestionsCarousel = ({ tmdbApiKey }) => {
               <img src={`https://image.tmdb.org/t/p/w400/${movie.poster_path}`} alt={movie.title} />
               <div className="movie-info">
                 <h3>{movie.title}</h3>
-                <p>Note : {movie.vote_average}</p>
+                <p>Note : {Math.round(movie.vote_average * 10)}%</p>
                 <Link to={`/movie/${movie.id}`} className="details-link">détails</Link>
               </div>
             </Link>

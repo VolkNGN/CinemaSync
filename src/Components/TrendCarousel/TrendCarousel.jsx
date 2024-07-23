@@ -70,7 +70,7 @@ const TrendCarousel = ({ tmdbApiKey }) => {
               <img src={`https://image.tmdb.org/t/p/w400/${movie.poster_path}`} alt={movie.title} />
               <div className="movie-info">
                 <h3>{movie.title}</h3>
-                <p>Note : {movie.vote_average}</p>
+                <p>Note : {Math.round(movie.vote_average * 10)}%</p>
                 <Link to={`/movie/${movie.id}`} className="details-link">détails</Link>
               </div>
             </Link>

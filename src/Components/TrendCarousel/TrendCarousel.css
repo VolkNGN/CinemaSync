@@ -29,8 +29,8 @@ h2 {
 }
 
 .movie-card img {
-    width: 100%;
-    height: 100%; /* Assurez-vous que l'image utilise toute la hauteur disponible */
+    width: 80%;
+    height: 80%; /* Assurez-vous que l'image utilise toute la hauteur disponible */
     border-radius: 10px;
     transition: transform 0.3s, width 0.3s, height 0.3s, scale 0.3s; /* Ajout de la transition pour la mise à l'échelle */
 }
@@ -97,7 +97,7 @@ h2 {
 }
 
 .details-link:hover {
-    background-color: #333;
+    background-color: #ff0000;
     transform: scale(1.00);
 }
 

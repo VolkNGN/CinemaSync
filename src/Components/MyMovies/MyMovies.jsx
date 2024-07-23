@@ -3,7 +3,7 @@ import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import { Link } from 'react-router-dom';
-import './FavoritesCarousel.css';
+import '../FavoritesCarousel/FavoritesCarousel.css';
 
 const FavoritesCarousel = () => {
   const [favorites, setFavorites] = useState([]);
