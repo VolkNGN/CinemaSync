@@ -1,70 +1,114 @@
-# Getting Started with Create React App
+# Créateurs
+Alex & Sidney
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# MovieSync
 
-## Available Scripts
+MovieSync est une application web développée avec React permettant aux utilisateurs de rechercher des films, de consulter les détails des films et de les ajouter à leurs favoris.
 
-In the project directory, you can run:
+## Table des matières
 
-### `npm start`
+- [Aperçu](#aperçu)
+- [Fonctionnalités](#fonctionnalités)
+- [Technologies](#technologies)
+- [Installation](#installation)
+- [Utilisation](#utilisation)
+- [Structure du Projet](#structure-du-projet)
+- [Contributions](#contributions)
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## Aperçu
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+MovieSync offre une interface conviviale pour explorer les films populaires, les tendances actuelles et gérer une liste de favoris. Vous pouvez également consulter les détails de chaque film, y compris des bandes-annonces et des informations détaillées.
 
-### `npm test`
+## Fonctionnalités
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- Consultation des films populaires et des tendances actuelles.
+- Ajout et suppression de films dans les favoris.
+- Visualisation des détails des films y compris les bandes-annonces.
+- Interface utilisateur réactive et conviviale.
 
-### `npm run build`
+## Technologies
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+- React
+- React Router
+- CSS
+- TMDB API (The Movie Database)
+- YouTube IFrame API
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## Installation
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+1. Clonez le dépôt :
 
-### `npm run eject`
+   ```bash
+   git clone https://github.com/VolkNGN/MovieSync.git
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+   Accédez au répertoire du projet :
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+bash
+Copier le code
+cd MovieSync
+Installez les dépendances :
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+bash
+Copier le code
+npm install
+Créez un fichier .env à la racine du projet et ajoutez-y vos clés API :
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+env
+Copier le code
+REACT_APP_TMDB_API_KEY=your_tmdb_api_key
+REACT_APP_YOUTUBE_API_KEY=your_youtube_api_key
+Utilisation
+Lancez l'application :
 
-## Learn More
+bash
+Copier le code
+npm start
+Ouvrez votre navigateur et accédez à http://localhost:3000.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+## Structure du Projet
+bash
+Copier le code
+MovieSync/
+├── public/
+│   ├── index.html
+│   └── ...
+├── src/
+│   ├── components/
+│   │   ├── Header/
+│   │   │   ├── Header.jsx
+│   │   │   └── Header.css
+│   │   ├── BackgroundAccueil/
+│   │   │   ├── BackgroundAccueil.jsx
+│   │   │   └── BackgroundAccueil.css
+│   │   ├── FavoriteMovies.jsx
+│   │   ├── MovieList.jsx
+│   │   ├── ProfilePage.jsx
+│   │   ├── SuggestionsCarousel/
+│   │   │   ├── SuggestionsCarousel.jsx
+│   │   │   └── SuggestionsCarousel.css
+│   │   ├── TrendCarousel/
+│   │   │   ├── TrendCarousel.jsx
+│   │   │   └── TrendCarousel.css
+│   │   ├── MovieDetails/
+│   │   │   ├── MovieDetails.jsx
+│   │   │   └── MovieDetails.css
+│   │   └── Footer/
+│   │       ├── Footer.jsx
+│   │       └── Footer.css
+│   ├── App.jsx
+│   ├── App.css
+│   ├── index.jsx
+│   └── ...
+├── .env
+├── package.json
+└── README.md
 
-### Code Splitting
+## Contributions :) 
+Les contributions sont les bienvenues ! Si vous souhaitez contribuer, veuillez suivre les étapes suivantes :
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Forkez le projet.
+Créez une branche pour votre fonctionnalité (git checkout -b feature/nouvelle-fonctionnalité).
+Commitez vos modifications (git commit -m 'Ajout de nouvelle fonctionnalité').
+Poussez votre branche (git push origin feature/nouvelle-fonctionnalité).
+Ouvrez une Pull Request.
