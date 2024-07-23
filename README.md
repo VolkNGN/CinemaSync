@@ -12,7 +12,6 @@ MovieSync est une application web développée avec React permettant aux utilisa
 - [Technologies](#technologies)
 - [Installation](#installation)
 - [Utilisation](#utilisation)
-- [Contributions](#contributions)
 
 ## Aperçu
 
