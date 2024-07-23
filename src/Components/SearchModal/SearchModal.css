@@ -1,0 +1,89 @@
+/* General modal styles */
+.modal-overlay {
+    position:absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.8);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000; /* Ensure the modal is above other content */
+}
+
+.modal-content {
+    background-color: #000000;
+    padding: 20px;
+    border-radius: 10px;
+    width: 90%;
+    max-width: 800px;
+    max-height: 80%;
+    overflow-y: auto;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    position: relative;
+    text-align: center;
+}
+
+.close-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+    color: #333;
+}
+
+.movie-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+    margin-top: 20px;
+}
+
+.movie-item {
+    background-color: #f9f9f900;
+    border-radius: 10px;
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    width: calc(50% - 20px); /* 2 items per row with space */
+    max-width: 150px;
+}
+
+.movie-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.movie-item img {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+.movie-item h3 {
+    margin: 10px 0;
+    font-size: 1rem;
+    color: #333;
+}
+
+.movie-item p {
+    margin: 0 0 10px;
+    color: #666;
+    font-size: 0.875rem;
+}
+
+@media (min-width: 768px) {
+    .movie-item {
+        width: calc(33.333% - 20px); /* 3 items per row with space */
+    }
+}
+
+@media (min-width: 1024px) {
+    .movie-item {
+        width: calc(25% - 20px); /* 4 items per row with space */
+    }
+}
